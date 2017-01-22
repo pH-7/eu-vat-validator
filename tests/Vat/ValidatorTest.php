@@ -55,7 +55,25 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider vatNumberDetails
+     * @dataProvider validVatNumberDetails
+     */
+    public function testValidVatNumberStatus(stdClass $oVatDetails)
+    {
+        $oValidator = $this->setUpAndMock($oVatDetails);
+        $this->assertTrue($oValidator->check());
+    }
+
+    /**
+     * @dataProvider invalidVatNumberDetails
+     */
+    public function testInvalidVatNumberStatus(stdClass $oVatDetails)
+    {
+        $oValidator = $this->setUpAndMock($oVatDetails);
+        $this->assertFalse($oValidator->check());
+    }
+
+    /**
+     * @dataProvider validVatNumberDetails
      */
     public function testName(stdClass $oVatDetails)
     {
@@ -64,7 +82,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider vatNumberDetails
+     * @dataProvider validVatNumberDetails
      */
     public function testAddress(stdClass $oVatDetails)
     {
@@ -73,7 +91,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider vatNumberDetails
+     * @dataProvider validVatNumberDetails
      */
     public function testCountryCode(stdClass $oVatDetails)
     {
@@ -82,7 +100,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider vatNumberDetails
+     * @dataProvider validVatNumberDetails
      */
     public function testVatNumber(stdClass $oVatDetails)
     {
@@ -91,7 +109,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider vatNumberDetails
+     * @dataProvider validVatNumberDetails
      */
     public function testRequestDate(stdClass $oVatDetails)
     {
@@ -131,7 +149,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         return $aData;
     }
 
-    public function vatNumberDetails(): array
+    public function validVatNumberDetails(): array
     {
         $oData = new stdClass;
         $oData->valid = true;
@@ -146,13 +164,22 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         ];
     }
 
+    public function invalidVatNumberDetails(): array
+    {
+        $oData = new stdClass;
+        $oData->valid = false;
+
+        return [
+            [$oData]
+        ];
+    }
+
     private function setUpAndMock(stdClass $oVatDetails): \Phake_IMock
     {
         $oProvider = Phake::mock(Providable::class);
         Phake::when($oProvider)->getResource(Phake::anyParameters())->thenReturn($oVatDetails);
         $oValidator = Phake::partialMock(Validator::class, $oProvider, '0472429986', 'BE');
         Phake::verify($oValidator)->sanitize();
-        $this->assertTrue($oValidator->check());
 
         return $oValidator;
     }
