@@ -10,7 +10,6 @@ declare(strict_types=1);
 namespace PH7\Eu\Tests\Vat\Provider;
 
 use PH7\Eu\Vat\Provider\Europa;
-use stdClass;
 
 class ProviderTest extends \PHPUnit_Framework_TestCase
 {
