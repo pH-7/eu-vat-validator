@@ -1,0 +1,29 @@
+{
+    "name": "ph-7/eu-vat-validator",
+    "description": "A simple and clean PHP class that validates EU VAT numbers against the central ec.europa.eu database (using the official europa API).",
+    "keywords": ["eu vat", "vat number", "validate eu vat", "validate vat number", "vat validator", "vat number validator", "tva", "tva number"],
+    "type": "library",
+    "homepage": "http://ph7.me",
+    "license": "GPL-3.0+",
+    "authors": [
+        {
+            "name": "Pierre-Henry Soria",
+            "email": "phs@hizup.net",
+            "homepage": "http://about.ph7.me",
+            "role": "Software Engineer"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0",
+        "ext-soap": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.5",
+        "phake/phake": "^2.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "PH7\\Eu\\": "src/"
+        }
+    }
+}

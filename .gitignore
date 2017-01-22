@@ -1,0 +1,29 @@
+/vendor
+composer.lock
+composer.phar
+*.log
+*.tmp
+.env
+
+## Gettext ##
+*.mo
+
+## OS ##
+
+# Linux
+*~
+*.swp
+# KDE
+.directory
+
+# Windows
+ehthumbs.db
+Icon?
+Thumbs.db
+
+# Mac OS
+.DS_Store*
+._*
+
+# PHPStorm IDE folder.
+/.idea
