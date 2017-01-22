@@ -148,9 +148,9 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 
     private function setUpAndMock(stdClass $oVatDetails): \Phake_IMock
     {
-        $oEuropaProvider = Phake::mock(Europa::class);
-        Phake::when($oEuropaProvider)->getResource(Phake::anyParameters())->thenReturn($oVatDetails);
-        $oValidator = Phake::partialMock(Validator::class, $oEuropaProvider, '0472429986', 'BE');
+        $oProvider = Phake::mock(Providable::class);
+        Phake::when($oProvider)->getResource(Phake::anyParameters())->thenReturn($oVatDetails);
+        $oValidator = Phake::partialMock(Validator::class, $oProvider, '0472429986', 'BE');
         Phake::verify($oValidator)->sanitize();
         $this->assertTrue($oValidator->check());
 
