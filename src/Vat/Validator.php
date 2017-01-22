@@ -9,35 +9,26 @@ declare(strict_types=1);
 
 namespace PH7\Eu\Vat;
 
-use SoapClient;
-use SoapFault;
-use stdClass;
+use PH7\Eu\Vat\Provider\Providable;
 
 class Validator implements Validatable
 {
-    const EU_VAT_API = 'http://ec.europa.eu/taxation_customs/vies/checkVatService.wsdl';
-
     private $sVatNumber;
     private $sCountryCode;
-    private $oClient;
+    private $oProvider;
 
     /**
-     * @param int|string $sVatNumber The VAT number
-     * @param string $sCountryCode The country code
-     * @throws SoapFault
+     * @param Providable $oProvider The API that checks the VAT no. and retrieve the VAT registration's details.
+     * @param int|string $sVatNumber The VAT number.
+     * @param string $sCountryCode The country code.
      */
-    public function __construct($sVatNumber, string $sCountryCode)
+    public function __construct(Providable $oProvider, $sVatNumber, string $sCountryCode)
     {
-        try {
-            $this->oClient = new SoapClient(self::EU_VAT_API);
-        } catch(SoapFault $oExcept) {
-            exit('Impossible to connect to the europa SOAP  : ' . $oExcept->faultstring);
-        }
-
         $this->sVatNumber = $sVatNumber;
         $this->sCountryCode = $sCountryCode;
 
         $this->sanitize();
+        $this->oResponse = $oProvider->getResource($sVatNumber, $sCountryCode);
     }
 
     /**
@@ -47,38 +38,32 @@ class Validator implements Validatable
      */
     public function check(): bool
     {
-        $oResponse = $this->sendRequest();
-        return (bool) $oResponse->valid;
+        return (bool) $this->oResponse->valid;
     }
 
     public function getName(): string
     {
-        $oResponse = $this->sendRequest();
-        return $oResponse->name ?? '';
+        return $this->oResponse->name ?? '';
     }
 
     public function getAddress(): string
     {
-        $oResponse = $this->sendRequest();
-        return $this->removeNewLines($oResponse->address) ?? '';
+        return $this->removeNewLines($this->oResponse->address) ?? '';
     }
 
     public function getRequestDate(): string
     {
-        $oResponse = $this->sendRequest();
-        return $oResponse->requestDate ?? '';
+        return $this->oResponse->requestDate ?? '';
     }
 
     public function getCountryCode(): string
     {
-        $oResponse = $this->sendRequest();
-        return $oResponse->countryCode ?? '';
+        return $this->oResponse->countryCode ?? '';
     }
 
     public function getVatNumber(): string
     {
-        $oResponse = $this->sendRequest();
-        return $oResponse->vatNumber ?? '';
+        return $this->oResponse->vatNumber ?? '';
     }
 
     public function sanitize()
@@ -90,27 +75,5 @@ class Validator implements Validatable
     protected function removeNewLines(string $sString): string
     {
         return str_replace(["\n", "\r\n"], ', ', $sString);
-    }
-
-    /**
-     * Send the VAT number and country code to europa.eu API.
-     *
-     * @return stdClass The VAT number's details.
-     * @throws SoapFault
-     * @throws Exception
-     */
-    protected function sendRequest(): stdClass
-    {
-        try {
-            $aDetails = [
-                'countryCode' => strtoupper($this->sCountryCode),
-                'vatNumber' => $this->sVatNumber
-            ];
-            return $this->oClient->checkVat($aDetails);
-        } catch(SoapFault $oExcept) {
-            //trigger_error('Impossible to retrieve the VAT details: ' . $oExcept->faultstring);
-            throw new Exception('Impossible to retrieve the VAT details: ' . $oExcept->faultstring);
-            return new stdClass;
-        }
     }
 }

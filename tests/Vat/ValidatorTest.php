@@ -11,6 +11,8 @@ namespace PH7\Eu\Tests\Vat;
 
 use PH7\Eu\Vat\Validator;
 use PH7\Eu\Vat\Exception;
+use PH7\Eu\Vat\Provider\Providable;
+use PH7\Eu\Vat\Provider\Europa;
 use Phake;
 use SoapFault;
 use stdClass;
@@ -30,7 +32,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
     public function testValidVatNumbers($sVatNumber, string $sCountryCode)
     {
         try {
-            $oVatValidator = new Validator($sVatNumber, $sCountryCode);
+            $oVatValidator = new Validator(new Europa, $sVatNumber, $sCountryCode);
             $this->assertTrue($oVatValidator->check());
         } catch (Exception $oExcept) {
             $this->assertIsResponseFailure($oExcept);
@@ -45,7 +47,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
     public function testInvalidVatNumbers($sVatNumber, string $sCountryCode)
     {
         try {
-            $oVatValidator = new Validator($sVatNumber, $sCountryCode);
+            $oVatValidator = new Validator(new Europa, $sVatNumber, $sCountryCode);
             $this->assertFalse($oVatValidator->check());
         } catch (Exception $oExcept) {
             $this->assertIsResponseFailure($oExcept);
@@ -97,11 +99,21 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('2017-01-22+01:00', $oValidator->getRequestDate());
     }
 
+    public function testResource()
+    {
+        try {
+            $oEuropa = new Europa;
+            $this->assertInstanceOf(stdClass::class, $oEuropa->getResource('0472429986', 'BE'));
+        } catch (Exception $oExcept) {
+            $this->assertIsResponseFailure($oExcept);
+        }
+    }
+
     public function validVatNumbers(): array
     {
         $aData = [
             ['0472429986', 'BE'],
-            [243852752, 'GB'],
+            ['9763375H', 'IE'],
             [29672050085, 'FR']
         ];
 
@@ -111,7 +123,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
     public function invalidVatNumbers(): array
     {
         $aData = [
-            [243852752, 'UK'],
+            [243852752, 'UK'], // Has to be 'GB'
             [29672050085, 'FRANCE'],
             ['blablabla', 'DE']
         ];
@@ -136,8 +148,9 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 
     private function setUpAndMock(stdClass $oVatDetails): \Phake_IMock
     {
-        $oValidator = Phake::partialMock(Validator::class, '0472429986', 'BE');
-        Phake::when($oValidator)->sendRequest()->thenReturn($oVatDetails);
+        $oEuropaProvider = Phake::mock(Europa::class);
+        Phake::when($oEuropaProvider)->getResource(Phake::anyParameters())->thenReturn($oVatDetails);
+        $oValidator = Phake::partialMock(Validator::class, $oEuropaProvider, '0472429986', 'BE');
         Phake::verify($oValidator)->sanitize();
         $this->assertTrue($oValidator->check());
 
