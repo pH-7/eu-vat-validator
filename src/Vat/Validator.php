@@ -28,7 +28,7 @@ class Validator implements Validatable
         $this->sCountryCode = $sCountryCode;
 
         $this->sanitize();
-        $this->oResponse = $oProvider->getResource($sVatNumber, $sCountryCode);
+        $this->oResponse = $oProvider->getResource($this->sVatNumber, $this->sCountryCode);
     }
 
     /**
@@ -70,6 +70,7 @@ class Validator implements Validatable
     {
         $aSearch = [$this->sCountryCode, '-', '_', '.', ',', ' '];
         $this->sVatNumber = trim(str_replace($aSearch, '', $this->sVatNumber));
+        $this->sCountryCode = strtoupper($this->sCountryCode);
     }
 
     protected function removeNewLines(string $sString): string
