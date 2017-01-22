@@ -23,7 +23,7 @@
     },
     "autoload": {
         "psr-4": {
-            "PH7\\Eu\\": "src/"
+            "PH7\\Eu\\": "src"
         }
     }
 }
