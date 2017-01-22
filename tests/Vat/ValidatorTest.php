@@ -102,8 +102,8 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
     public function testResource()
     {
         try {
-            $oEuropa = new Europa;
-            $this->assertInstanceOf(stdClass::class, $oEuropa->getResource('0472429986', 'BE'));
+            $oEuropaProvider = new Europa;
+            $this->assertInstanceOf(stdClass::class, $oEuropaProvider->getResource('0472429986', 'BE'));
         } catch (Exception $oExcept) {
             $this->assertIsResponseFailure($oExcept);
         }
