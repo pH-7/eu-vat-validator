@@ -3,6 +3,17 @@
 A simple and clean PHP class that validates EU VAT numbers against the central ec.europa.eu database (using the official europa API).
 
 
+## The Problem
+
+Validate VAT numbers might be difficult and if you use a validation pattern to check if the format is valid, you are never sure if the VAT registration number is still valid.
+
+## The Solution
+
+This [PHP VAT validator library](https://github.com/pH-7/eu-vat-validator) uses real-time data feeds from individual EU member states' VAT systems so you are sure of the validity of the number and avoid fraud with expired or wrong VAT numbers.
+
+For example, this kind of validation can be very useful on online payment forms.
+
+
 ## Composer Installation
 
 * Be sure PHP 7.0 or higher is installed
@@ -66,12 +77,17 @@ if ($oVatValidator->check()) {
 
 ## About Me
 
-I'm **Pierre-Henry Soria**, a passionate Software Engineer.
+I'm **Pierre-Henry Soria**, a passionate Software Engineer and the creator of [pH7CMS](https://github.com/pH7Software/pH7-Social-Dating-CMS).
 
 
 ## Where to Contact Me?
 
 You can by email at **pierrehenrysoria+github [[AT]] gmail [[D0T]] com**
+
+
+## References
+
+[VAT Information Exchange System (VIES)](http://ec.europa.eu/taxation_customs/vies/)
 
 
 ## License
