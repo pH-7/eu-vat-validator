@@ -88,6 +88,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
     {
         $oValidator = $this->setUpAndMock($oVatDetails);
         $this->assertEquals('ELSENSE STEENWEG 12, 1050 ELSENE', $oValidator->getAddress());
+        Phake::verify($oValidator)->removeNewLines('ELSENSE STEENWEG 12, 1050 ELSENE');
     }
 
     /**
@@ -180,6 +181,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         Phake::when($oProvider)->getResource(Phake::anyParameters())->thenReturn($oVatDetails);
         $oValidator = Phake::partialMock(Validator::class, $oProvider, '0472429986', 'BE');
         Phake::verify($oValidator)->sanitize();
+        Phake::verify($oProvider)->getResource('0472429986', 'BE');
 
         return $oValidator;
     }
