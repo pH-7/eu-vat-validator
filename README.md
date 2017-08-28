@@ -33,7 +33,7 @@ require_once 'vendor/autoload.php';
 ```
 
 
-## Manual Installation (*the old-fashion way*)
+## Manual Installation (*the old-fashioned way*)
 
 If you don't use Composer, you can install it without Composer by including the following
 
