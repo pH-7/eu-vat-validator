@@ -2,6 +2,8 @@
 
 A simple and clean PHP class that validates EU VAT numbers against the central ec.europa.eu database (using the official europa API).
 
+![EU VATIN validator; EU Flag](eu-flag.svg)
+
 
 ## The Problem
 
