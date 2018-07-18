@@ -187,8 +187,8 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         return $oValidator;
     }
 
-    private function assertIsResponseFailure(Exception $oExecpt)
+    private function assertIsResponseFailure(Exception $oExcept)
     {
-        $this->assertRegexp('/^Impossible to retrieve the VAT details/' , $oExecpt->getMessage());
+        $this->assertRegexp('/^Impossible to retrieve the VAT details/', $oExcept->getMessage());
     }
 }
