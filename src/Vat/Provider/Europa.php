@@ -41,8 +41,8 @@ class Europa implements Providable
     /**
      * Send the VAT number and country code to europa.eu API and get the data.
      *
-     * @param  int|string $sVatNumber The VAT number
-     * @param  string $sCountryCode The country code
+     * @param int|string $sVatNumber The VAT number
+     * @param string $sCountryCode The country code
      * @return stdClass The VAT number's details.
      * @throws SoapFault
      * @throws Exception
