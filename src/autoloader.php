@@ -15,7 +15,7 @@ spl_autoload_register(function ($sClass) {
     $sClass = str_replace([__NAMESPACE__ . '\\', '\\'], DIRECTORY_SEPARATOR, $sClass);
 
     // Get library classes
-    if (is_file(dirname(__FILE__) . $sClass . '.php')) {
-        require_once dirname(__FILE__) . $sClass . '.php';
+    if (is_file(__DIR__ . $sClass . '.php')) {
+        require_once __DIR__ . $sClass . '.php';
     }
 });
