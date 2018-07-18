@@ -15,6 +15,7 @@ class Validator implements Validatable
 {
     private $sVatNumber;
     private $sCountryCode;
+    private $oResponse;
 
     /**
      * @param Providable $oProvider The API that checks the VAT no. and retrieve the VAT registration's details.
