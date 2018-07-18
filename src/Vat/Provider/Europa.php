@@ -1,8 +1,8 @@
 <?php
 /**
-* @author         Pierre-Henry Soria <pierrehenrysoria@gmail.com>
-* @copyright      (c) 2017, Pierre-Henry Soria. All Rights Reserved.
-* @license        GNU General Public License; <https://www.gnu.org/licenses/gpl-3.0.en.html>
+ * @author         Pierre-Henry Soria <pierrehenrysoria@gmail.com>
+ * @copyright      (c) 2017, Pierre-Henry Soria. All Rights Reserved.
+ * @license        GNU General Public License; <https://www.gnu.org/licenses/gpl-3.0.en.html>
  */
 
 declare(strict_types=1);
@@ -10,9 +10,9 @@ declare(strict_types=1);
 namespace PH7\Eu\Vat\Provider;
 
 use PH7\Eu\Vat\Exception;
-use stdClass;
 use SoapClient;
 use SoapFault;
+use stdClass;
 
 class Europa implements Providable
 {
@@ -21,14 +21,11 @@ class Europa implements Providable
     /** @var SoapClient */
     private $oClient;
 
-    /**
-     * @throws SoapFault
-     */
     public function __construct()
     {
         try {
             $this->oClient = new SoapClient($this->getApiUrl());
-        } catch(SoapFault $oExcept) {
+        } catch (SoapFault $oExcept) {
             exit('Impossible to connect to the europa SOAP  : ' . $oExcept->faultstring);
         }
     }
@@ -43,7 +40,9 @@ class Europa implements Providable
      *
      * @param int|string $sVatNumber The VAT number
      * @param string $sCountryCode The country code
+     *
      * @return stdClass The VAT number's details.
+     *
      * @throws SoapFault
      * @throws Exception
      */
@@ -55,9 +54,10 @@ class Europa implements Providable
                 'vatNumber' => $sVatNumber
             ];
             return $this->oClient->checkVat($aDetails);
-        } catch(SoapFault $oExcept) {
+        } catch (SoapFault $oExcept) {
             //trigger_error('Impossible to retrieve the VAT details: ' . $oExcept->faultstring);
             throw new Exception('Impossible to retrieve the VAT details: ' . $oExcept->faultstring);
+
             return new stdClass;
         }
     }

@@ -10,9 +10,9 @@
 namespace PH7\Eu;
 
 // Autoloading Classes Files
-spl_autoload_register(function($sClass) {
+spl_autoload_register(function ($sClass) {
     // Hack to remove namespace and backslash
-    $sClass = str_replace(array(__NAMESPACE__ . '\\', '\\'), DIRECTORY_SEPARATOR, $sClass);
+    $sClass = str_replace([__NAMESPACE__ . '\\', '\\'], DIRECTORY_SEPARATOR, $sClass);
 
     // Get library classes
     if (is_file(dirname(__FILE__) . $sClass . '.php')) {

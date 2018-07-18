@@ -1,20 +1,19 @@
 <?php
 /**
-* @author         Pierre-Henry Soria <pierrehenrysoria@gmail.com>
-* @copyright      (c) 2017, Pierre-Henry Soria. All Rights Reserved.
-* @license        GNU General Public License; <https://www.gnu.org/licenses/gpl-3.0.en.html>
+ * @author         Pierre-Henry Soria <pierrehenrysoria@gmail.com>
+ * @copyright      (c) 2017, Pierre-Henry Soria. All Rights Reserved.
+ * @license        GNU General Public License; <https://www.gnu.org/licenses/gpl-3.0.en.html>
  */
 
 declare(strict_types=1);
 
 namespace PH7\Eu\Tests\Vat;
 
-use PH7\Eu\Vat\Validator;
 use PH7\Eu\Vat\Exception;
-use PH7\Eu\Vat\Provider\Providable;
 use PH7\Eu\Vat\Provider\Europa;
+use PH7\Eu\Vat\Provider\Providable;
+use PH7\Eu\Vat\Validator;
 use Phake;
-use SoapFault;
 use stdClass;
 
 class ValidatorTest extends \PHPUnit_Framework_TestCase
@@ -26,6 +25,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider validVatNumbers
+     *
      * @param int|string $sVatNumber The VAT number
      * @param string $sCountryCode The country code
      */
@@ -41,6 +41,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider invalidVatNumbers
+     *
      * @param int|string $sVatNumber The VAT number
      * @param string $sCountryCode The country code
      */
