@@ -18,6 +18,7 @@ class Europa implements Providable
 {
     const EU_VAT_API = 'http://ec.europa.eu/taxation_customs/vies/checkVatService.wsdl';
 
+    /** @var SoapClient */
     private $oClient;
 
     /**

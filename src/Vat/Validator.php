@@ -10,11 +10,17 @@ declare(strict_types=1);
 namespace PH7\Eu\Vat;
 
 use PH7\Eu\Vat\Provider\Providable;
+use stdClass;
 
 class Validator implements Validatable
 {
+    /** @var int|string */
     private $sVatNumber;
+
+    /** @var string */
     private $sCountryCode;
+
+    /** @var stdClass */
     private $oResponse;
 
     /**
