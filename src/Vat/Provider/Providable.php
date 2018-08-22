@@ -14,5 +14,6 @@ use stdClass;
 interface Providable
 {
     public function getApiUrl(): string;
+
     public function getResource($sVatNumber, string $sCountryCode): stdClass;
 }

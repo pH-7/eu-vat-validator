@@ -10,5 +10,6 @@ namespace PH7\Eu\Vat;
 interface Validatable
 {
     public function check(): bool;
+
     public function sanitize();
 }
