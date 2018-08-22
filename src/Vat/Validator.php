@@ -54,7 +54,7 @@ class Validator implements Validatable
 
     public function getAddress(): string
     {
-        return $this->removeNewLines($this->oResponse->address) ?? '';
+        return $this->cleanAddress($this->oResponse->address) ?? '';
     }
 
     public function getRequestDate(): string
@@ -79,8 +79,8 @@ class Validator implements Validatable
         $this->sCountryCode = strtoupper($this->sCountryCode);
     }
 
-    protected function removeNewLines(string $sString): string
+    protected function cleanAddress(string $sString): string
     {
-        return str_replace(["\n", "\r\n"], ', ', $sString);
+        return trim(str_replace(["\n", "\r\n"], ', ', $sString), ', ');
     }
 }

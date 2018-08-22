@@ -89,7 +89,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
     {
         $oValidator = $this->setUpAndMock($oVatDetails);
         $this->assertEquals('ELSENSE STEENWEG 12, 1050 ELSENE', $oValidator->getAddress());
-        Phake::verify($oValidator)->removeNewLines('ELSENSE STEENWEG 12, 1050 ELSENE');
+        Phake::verify($oValidator)->cleanAddress('ELSENSE STEENWEG 12, 1050 ELSENE');
     }
 
     /**
