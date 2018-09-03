@@ -13,7 +13,7 @@
   ],
   "type": "library",
   "homepage": "http://ph7.me",
-  "license": "GPL-3.0+",
+  "license": "GPL-3.0-or-later",
   "authors": [
     {
       "name": "Pierre-Henry Soria",
