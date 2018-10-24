@@ -43,7 +43,6 @@ class Europa implements Providable
      *
      * @return stdClass The VAT number's details.
      *
-     * @throws SoapFault
      * @throws Exception
      */
     public function getResource($sVatNumber, string $sCountryCode): stdClass
