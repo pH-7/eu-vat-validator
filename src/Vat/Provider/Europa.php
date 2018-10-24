@@ -22,7 +22,7 @@ class Europa implements Providable
     private $oClient;
 
     /**
-     * Europa constructor
+     * Europa Provider constructor
      *
      * @throws Exception
      */
