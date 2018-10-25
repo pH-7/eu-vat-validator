@@ -21,12 +21,17 @@ class Europa implements Providable
     /** @var SoapClient */
     private $oClient;
 
+    /**
+     * Europa Provider constructor
+     *
+     * @throws Exception
+     */
     public function __construct()
     {
         try {
             $this->oClient = new SoapClient($this->getApiUrl());
         } catch (SoapFault $oExcept) {
-            exit('Impossible to connect to the europa SOAP  : ' . $oExcept->faultstring);
+            throw new Exception('Impossible to connect to the Europa SOAP  : ' .$oExcept->faultstring, 0, $oExcept);
         }
     }
 
