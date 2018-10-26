@@ -61,8 +61,6 @@ class Europa implements Providable
         } catch (SoapFault $oExcept) {
             //trigger_error('Impossible to retrieve the VAT details: ' . $oExcept->faultstring);
             throw new Exception('Impossible to retrieve the VAT details: ' . $oExcept->faultstring);
-
-            return new stdClass;
         }
     }
 }
