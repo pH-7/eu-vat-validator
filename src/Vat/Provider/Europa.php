@@ -65,7 +65,6 @@ class Europa implements Providable
             ];
             return $this->oClient->checkVat($aDetails);
         } catch (SoapFault $oExcept) {
-            //trigger_error('Impossible to retrieve the VAT details: ' . $oExcept->faultstring);
             throw new Exception(
                 sprintf(self::IMPOSSIBLE_RETRIEVE_DATA_MESSAGE, $oExcept->faultstring)
             );
