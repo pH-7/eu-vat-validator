@@ -17,6 +17,8 @@ use stdClass;
 class Europa implements Providable
 {
     const EU_VAT_API = 'http://ec.europa.eu/taxation_customs/vies/checkVatService.wsdl';
+    const IMPOSSIBLE_CONNECT_API_MESSAGE = 'Impossible to connect to the Europa SOAP: %s';
+    const IMPOSSIBLE_RETRIEVE_DATA_MESSAGE = 'Impossible to retrieve the VAT details: %s';
 
     /** @var SoapClient */
     private $oClient;
@@ -32,7 +34,7 @@ class Europa implements Providable
             $this->oClient = new SoapClient($this->getApiUrl());
         } catch (SoapFault $oExcept) {
             throw new Exception(
-                'Impossible to connect to the Europa SOAP: ' . $oExcept->faultstring,
+                sprintf(self::IMPOSSIBLE_CONNECT_API_MESSAGE, $oExcept->faultstring),
                 0,
                 $oExcept
             );
@@ -64,7 +66,9 @@ class Europa implements Providable
             return $this->oClient->checkVat($aDetails);
         } catch (SoapFault $oExcept) {
             //trigger_error('Impossible to retrieve the VAT details: ' . $oExcept->faultstring);
-            throw new Exception('Impossible to retrieve the VAT details: ' . $oExcept->faultstring);
+            throw new Exception(
+                sprintf(self::IMPOSSIBLE_RETRIEVE_DATA_MESSAGE, $oExcept->faultstring)
+            );
         }
     }
 }
