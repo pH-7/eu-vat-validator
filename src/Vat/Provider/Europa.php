@@ -31,7 +31,11 @@ class Europa implements Providable
         try {
             $this->oClient = new SoapClient($this->getApiUrl());
         } catch (SoapFault $oExcept) {
-            throw new Exception('Impossible to connect to the Europa SOAP  : ' . $oExcept->faultstring, 0, $oExcept);
+            throw new Exception(
+                'Impossible to connect to the Europa SOAP: ' . $oExcept->faultstring,
+                0,
+                $oExcept
+            );
         }
     }
 
