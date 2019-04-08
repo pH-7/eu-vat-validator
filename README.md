@@ -87,6 +87,11 @@ I'm **Pierre-Henry Soria**, a passionate Software Engineer and the creator of [p
 You can by email at **pierrehenrysoria+github [[AT]] gmail [[D0T]] com**
 
 
+## Wordpress Plugin
+
+[VIES Validator WP plugin](https://wordpress.org/plugins/vies-validator/) uses also this [EU VAT Validation library](https://github.com/pH-7/eu-vat-validator/) (that plugin was deleloped by [WpZen](https://wpzen.it), not me :smiley:).
+
+
 ## References
 
 [VAT Information Exchange System (VIES)](http://ec.europa.eu/taxation_customs/vies/)
