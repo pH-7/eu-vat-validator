@@ -8,8 +8,12 @@
     "validate vat number",
     "vat validator",
     "vat number validator",
+    "vat",
     "tva",
-    "tva number"
+    "tva number",
+    "validation",
+    "validator",
+    "VIES"
   ],
   "type": "library",
   "homepage": "http://ph7.me",
