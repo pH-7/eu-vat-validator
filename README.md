@@ -72,7 +72,7 @@ if ($oVatValidator->check()) {
 
 ## Optimization (Suggestion)
 
-Depending of the use of this library, it could be handy to cache the result specifically for a specified VAT number.
+Depending of the use of this library, it could be handy to cache the result specifically for each specified VAT number.
 
 
 ## Requirements
