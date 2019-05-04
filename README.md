@@ -84,7 +84,7 @@ Depending of the use of this library, it could be handy to cache the result spec
 
 ## About Me
 
-I'm **Pierre-Henry Soria**, a passionate Software Engineer and the creator of [pH7CMS](https://github.com/pH7Software/pH7-Social-Dating-CMS).
+I'm **[Pierre-Henry Soria](https://pierrehenry.be)**, a passionate Software Engineer and the creator of [pH7CMS](https://github.com/pH7Software/pH7-Social-Dating-CMS).
 
 
 ## Where to Contact Me?
