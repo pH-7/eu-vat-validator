@@ -1,7 +1,7 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <pierrehenrysoria@gmail.com>
- * @copyright      (c) 2017-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @author         Pierre-Henry Soria <hi@ph7.me>
+ * @copyright      (c) 2017-2021, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; <https://www.gnu.org/licenses/gpl-3.0.en.html>
  */
 
@@ -9,20 +9,17 @@ declare(strict_types=1);
 
 namespace PH7\Eu\Tests\Vat;
 
+use PHPUnit_Framework_TestCase
+use Phake;
+use stdClass;
+
 use PH7\Eu\Vat\Exception;
 use PH7\Eu\Vat\Provider\Europa;
 use PH7\Eu\Vat\Provider\Providable;
 use PH7\Eu\Vat\Validator;
-use Phake;
-use stdClass;
 
-class ValidatorTest extends \PHPUnit_Framework_TestCase
+class ValidatorTest extends PHPUnit_Framework_TestCase
 {
-    protected function setUp()
-    {
-
-    }
-
     /**
      * @dataProvider validVatNumbers
      *
