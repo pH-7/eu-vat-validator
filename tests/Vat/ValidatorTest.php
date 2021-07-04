@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 namespace PH7\Eu\Tests\Vat;
 
-use PHPUnit_Framework_TestCase
+use PHPUnit_Framework_TestCase;
 use Phake;
 use stdClass;
 
