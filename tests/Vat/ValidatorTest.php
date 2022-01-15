@@ -9,16 +9,16 @@ declare(strict_types=1);
 
 namespace PH7\Eu\Tests\Vat;
 
-use PHPUnit_Framework_TestCase;
-use Phake;
-use stdClass;
-
 use PH7\Eu\Vat\Exception;
 use PH7\Eu\Vat\Provider\Europa;
 use PH7\Eu\Vat\Provider\Providable;
 use PH7\Eu\Vat\Validator;
+use Phake;
+use Phake_IMock;
+use PHPUnit\Framework\TestCase;
+use stdClass;
 
-class ValidatorTest extends PHPUnit_Framework_TestCase
+class ValidatorTest extends TestCase
 {
     /**
      * @dataProvider validVatNumbers
@@ -26,7 +26,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
      * @param int|string $sVatNumber The VAT number
      * @param string $sCountryCode The country code
      */
-    public function testValidVatNumbers($sVatNumber, string $sCountryCode)
+    public function testValidVatNumbers($sVatNumber, string $sCountryCode): void
     {
         try {
             $oVatValidator = new Validator(new Europa, $sVatNumber, $sCountryCode);
@@ -42,7 +42,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
      * @param int|string $sVatNumber The VAT number
      * @param string $sCountryCode The country code
      */
-    public function testInvalidVatNumbers($sVatNumber, string $sCountryCode)
+    public function testInvalidVatNumbers($sVatNumber, string $sCountryCode): void
     {
         try {
             $oVatValidator = new Validator(new Europa, $sVatNumber, $sCountryCode);
@@ -55,7 +55,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider validVatNumberDetails
      */
-    public function testValidVatNumberStatus(stdClass $oVatDetails)
+    public function testValidVatNumberStatus(stdClass $oVatDetails): void
     {
         $oValidator = $this->setUpAndMock($oVatDetails);
         $this->assertTrue($oValidator->check());
@@ -64,7 +64,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider invalidVatNumberDetails
      */
-    public function testInvalidVatNumberStatus(stdClass $oVatDetails)
+    public function testInvalidVatNumberStatus(stdClass $oVatDetails): void
     {
         $oValidator = $this->setUpAndMock($oVatDetails);
         $this->assertFalse($oValidator->check());
@@ -73,7 +73,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider validVatNumberDetails
      */
-    public function testName(stdClass $oVatDetails)
+    public function testName(stdClass $oVatDetails): void
     {
         $oValidator = $this->setUpAndMock($oVatDetails);
         $this->assertEquals('NV EXKI', $oValidator->getName());
@@ -82,7 +82,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider validVatNumberDetails
      */
-    public function testAddress(stdClass $oVatDetails)
+    public function testAddress(stdClass $oVatDetails): void
     {
         $oValidator = $this->setUpAndMock($oVatDetails);
         $this->assertEquals('ELSENSE STEENWEG 12, 1050 ELSENE', $oValidator->getAddress());
@@ -92,7 +92,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider validVatNumberDetails
      */
-    public function testCountryCode(stdClass $oVatDetails)
+    public function testCountryCode(stdClass $oVatDetails): void
     {
         $oValidator = $this->setUpAndMock($oVatDetails);
         $this->assertEquals('BE', $oValidator->getCountryCode());
@@ -101,7 +101,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider validVatNumberDetails
      */
-    public function testVatNumber(stdClass $oVatDetails)
+    public function testVatNumber(stdClass $oVatDetails): void
     {
         $oValidator = $this->setUpAndMock($oVatDetails);
         $this->assertEquals('0472429986', $oValidator->getVatNumber());
@@ -110,13 +110,13 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider validVatNumberDetails
      */
-    public function testRequestDate(stdClass $oVatDetails)
+    public function testRequestDate(stdClass $oVatDetails): void
     {
         $oValidator = $this->setUpAndMock($oVatDetails);
         $this->assertEquals('2017-01-22+01:00', $oValidator->getRequestDate());
     }
 
-    public function testResource()
+    public function testResource(): void
     {
         try {
             $oEuropaProvider = new Europa;
@@ -124,28 +124,6 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         } catch (Exception $oExcept) {
             $this->assertIsResponseFailure($oExcept);
         }
-    }
-
-    public function validVatNumbers(): array
-    {
-        $aData = [
-            ['0472429986', 'BE'],
-            ['9763375H', 'IE'],
-            [29672050085, 'FR']
-        ];
-
-        return $aData;
-    }
-
-    public function invalidVatNumbers(): array
-    {
-        $aData = [
-            [243852752, 'UK'], // Has to be 'GB'
-            [29672050085, 'FRANCE'],
-            ['blablabla', 'DE']
-        ];
-
-        return $aData;
     }
 
     public function validVatNumberDetails(): array
@@ -173,7 +151,25 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         ];
     }
 
-    private function setUpAndMock(stdClass $oVatDetails): \Phake_IMock
+    public function validVatNumbers(): array
+    {
+        return [
+            ['0472429986', 'BE'],
+            ['9763375H', 'IE'],
+            [29672050085, 'FR']
+        ];
+    }
+
+    public function invalidVatNumbers(): array
+    {
+        return [
+            [243852752, 'UK'], // Has to be 'GB'
+            [29672050085, 'FRANCE'],
+            ['blablabla', 'DE']
+        ];
+    }
+
+    private function setUpAndMock(stdClass $oVatDetails): Phake_IMock
     {
         $oProvider = Phake::mock(Providable::class);
         Phake::when($oProvider)->getResource(Phake::anyParameters())->thenReturn($oVatDetails);
@@ -184,7 +180,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         return $oValidator;
     }
 
-    private function assertIsResponseFailure(Exception $oExcept)
+    private function assertIsResponseFailure(Exception $oExcept): void
     {
         $this->assertRegexp('/^Impossible to retrieve the VAT details/', $oExcept->getMessage());
     }

@@ -72,7 +72,7 @@ class Validator implements Validatable
         return $this->oResponse->vatNumber ?? '';
     }
 
-    public function sanitize()
+    public function sanitize(): void
     {
         $aSearch = [$this->sCountryCode, '-', '_', '.', ',', ' '];
         $this->sVatNumber = trim(str_replace($aSearch, '', $this->sVatNumber));

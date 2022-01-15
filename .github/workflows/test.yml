@@ -8,8 +8,8 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-latest ]
-        php-versions: [ '7.0', '7.1', '7.2', '7.3', '7.4']
-        phpunit-version: [ '5.5' ]
+        php-versions: [ '7.1', '7.2', '7.3', '7.4']
+        phpunit-version: [ '7.5' ]
     name: PHP ${{ matrix.php-versions }} Test on ${{ matrix.os }}
 
     steps:
@@ -22,7 +22,7 @@ jobs:
           php-version: ${{ matrix.php-versions }}
           extensions: soap
           coverage: xdebug
-          tools: phpunit:${{ matrix.phpunit-version }}, composer:v1
+          tools: phpunit:${{ matrix.phpunit-version }}, composer:v2
 
       - name: Check PHP Version
         run: php -v

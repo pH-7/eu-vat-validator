@@ -9,20 +9,20 @@ declare(strict_types=1);
 
 namespace PH7\Eu\Tests\Vat\Provider;
 
-use PHPUnit_Framework_TestCase;
 use PH7\Eu\Vat\Provider\Europa;
+use PHPUnit\Framework\TestCase;
 
-class ProviderTest extends PHPUnit_Framework_TestCase
+class ProviderTest extends TestCase
 {
     /** @var Europa */
     private $oEuropa;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->oEuropa = new Europa;
     }
 
-    public function testApiUrl()
+    public function testApiUrl(): void
     {
         $this->assertEquals(Europa::EU_VAT_API, $this->oEuropa->getApiUrl());
     }

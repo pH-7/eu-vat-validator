@@ -18,7 +18,7 @@ For example, this kind of validation can be very useful on online payment forms.
 
 ## Composer Installation
 
-* Be sure PHP 7.0 or higher is installed
+* Be sure PHP 7.1 or higher is installed
 
 * Install Composer (https://getcomposer.org)
 
@@ -77,7 +77,7 @@ Depending of the use of this library, it could be handy to cache the result spec
 
 ## Requirements
 
-* PHP 7.0 or higher
+* PHP 7.1 or higher
 * [Composer](https://getcomposer.org)
 * [SOAPClient](http://php.net/manual/en/class.soapclient.php) PHP Extension enabled
 

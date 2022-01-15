@@ -11,5 +11,5 @@ interface Validatable
 {
     public function check(): bool;
 
-    public function sanitize();
+    public function sanitize(): void;
 }
