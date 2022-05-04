@@ -1,20 +1,20 @@
 name: Tests
 
-on: [ push, pull_request ]
+on: [push, pull_request]
 
 jobs:
   run:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ ubuntu-latest ]
-        php-versions: [ '7.1', '7.2', '7.3', '7.4']
-        phpunit-version: [ '7.5' ]
+        os: ['ubuntu-latest']
+        php-versions: ['7.1', '7.2', '7.3', '7.4', '8.0', '8.1']
+        phpunit-version: ['7.5']
     name: PHP ${{ matrix.php-versions }} Test on ${{ matrix.os }}
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -38,7 +38,7 @@ jobs:
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
 
       - name: Cache Composer dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
