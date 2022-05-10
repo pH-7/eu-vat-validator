@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <pierrehenrysoria@gmail.com>
- * @copyright      (c) 2017-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2017-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; <https://www.gnu.org/licenses/gpl-3.0.en.html>
  */
 
@@ -16,7 +16,7 @@ use stdClass;
 
 class Europa implements Providable
 {
-    const EU_VAT_API = 'http://ec.europa.eu/taxation_customs/vies/checkVatService.wsdl';
+    const EU_VAT_API = 'https://ec.europa.eu/taxation_customs/vies/checkVatService.wsdl';
     const IMPOSSIBLE_CONNECT_API_MESSAGE = 'Impossible to connect to the Europa SOAP: %s';
     const IMPOSSIBLE_RETRIEVE_DATA_MESSAGE = 'Impossible to retrieve the VAT details: %s';
 
