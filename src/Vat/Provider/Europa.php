@@ -17,6 +17,7 @@ use stdClass;
 class Europa implements Providable
 {
     public const EU_VAT_API = 'https://ec.europa.eu/taxation_customs/vies/checkVatService.wsdl';
+
     private const IMPOSSIBLE_CONNECT_API_MESSAGE = 'Impossible to connect to the Europa SOAP: %s';
     private const IMPOSSIBLE_RETRIEVE_DATA_MESSAGE = 'Impossible to retrieve the VAT details: %s';
 
