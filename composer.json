@@ -16,13 +16,13 @@
     "VIES"
   ],
   "type": "library",
-  "homepage": "https://ph7.me",
+  "homepage": "https://pierrehenry.be",
   "license": "GPL-3.0-or-later",
   "authors": [
     {
       "name": "Pierre-Henry Soria",
       "email": "hi@ph7.me",
-      "homepage": "https://pierrehenry.be",
+      "homepage": "https://github.com/pH-7/eu-vat-validator",
       "role": "Software Engineer"
     }
   ],
