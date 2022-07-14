@@ -24,6 +24,6 @@ class ProviderTest extends TestCase
 
     public function testApiUrl(): void
     {
-        $this->assertEquals(Europa::EU_VAT_API . Europa::EU_VAT_WSDL, $this->oEuropa->getApiUrl());
+        $this->assertEquals(Europa::EU_VAT_API . Europa::EU_VAT_WSDL_ENDPOINT, $this->oEuropa->getApiUrl());
     }
 }
