@@ -18,11 +18,11 @@ For example, this kind of validation can be very useful on online payment forms.
 
 ## Composer Installation
 
-* Be sure PHP 7.1 or higher is installed
+* Be sure PHP **[v7.1](https://www.php.net/releases/7_1_0.php) or higher** is installed.
 
-* Install Composer (https://getcomposer.org)
+* Install Composer (https://getcomposer.org).
 
-* Then, include it in your project:
+* Then, include it in your project like belowe,
 
 ```bash
 composer require ph-7/eu-vat-validator
