@@ -10,7 +10,10 @@ require 'src/autoloader.php';
 use PH7\Eu\Vat\Provider\Europa;
 use PH7\Eu\Vat\Validator;
 
-$oVatValidator = new Validator(new Europa, '0472429986', 'BE');
+$sEuVatNumber = '0472429986'; // EU VAt number
+$sEuCountryCode = 'BE'; // EU two-letter country code
+
+$oVatValidator = new Validator(new Europa, $sEuVatNumber, $sEuCountryCode);
 
 if ($oVatValidator->check()) {
     $sRequestDate = $oVatValidator->getRequestDate();
