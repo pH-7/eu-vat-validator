@@ -10,7 +10,7 @@ require 'src/autoloader.php';
 use PH7\Eu\Vat\Provider\Europa;
 use PH7\Eu\Vat\Validator;
 
-$sEuVatNumber = '0472429986'; // EU VAt number
+$sEuVatNumber = '0472429986'; // EU VAT number
 $sEuCountryCode = 'BE'; // EU two-letter country code
 
 $oVatValidator = new Validator(new Europa, $sEuVatNumber, $sEuCountryCode);
