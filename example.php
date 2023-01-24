@@ -1,7 +1,7 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <pierrehenrysoria@gmail.com>
- * @copyright      (c) 2017-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @author         Pierre-Henry Soria <hi@pH7.me>
+ * @copyright      (c) 2017-2023, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; <https://www.gnu.org/licenses/gpl-3.0.en.html>
  */
 
@@ -17,7 +17,8 @@ $oVatValidator = new Validator(new Europa, $sEuVatNumber, $sEuCountryCode);
 
 if ($oVatValidator->check()) {
     $sRequestDate = $oVatValidator->getRequestDate();
-    // Optional, format the date
+ 
+    // Optional - explicitly format the date to d-m-Y format
     $sFormattedRequestDate = (new DateTime)->format('d-m-Y');
 
     echo 'Business Name: ' . $oVatValidator->getName() . '<br />';
